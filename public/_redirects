@@ -1,0 +1,6 @@
+# Forzar HTTPS
+http://kennykrass.com/* https://kennykrass.com/:splat 301!
+http://www.kennykrass.com/* https://www.kennykrass.com/:splat 301!
+
+# Redirigir www a non-www
+https://www.kennykrass.com/* https://kennykrass.com/:splat 301!
