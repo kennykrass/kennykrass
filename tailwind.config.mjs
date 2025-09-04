@@ -2,6 +2,17 @@
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class',
+  safelist: [
+    'text-blue-600',
+    'text-blue-700', 
+    'bg-blue-100',
+    'bg-blue-600',
+    'hover:text-blue-600',
+    'hover:text-blue-700',
+    'hover:bg-blue-600',
+    'border-blue-600',
+    'dark:border-blue-600'
+  ],
   theme: {
     extend: {
       colors: {
