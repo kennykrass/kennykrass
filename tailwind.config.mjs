@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'background': '#111827', // Un carbón casi negro, muy oscuro
-        'primary': '#1F2937',    // Índigo oscuro para paneles y tarjetas
+        'background': '#000000', // Negro puro igual al fondo del logo
+        'primary': '#111111',    // Gris muy oscuro para paneles con contraste sutil
         'accent': '#00FFFF',      // Cian Eléctrico vibrante para botones y highlights
         'text-primary': '#E5E7EB', // Plata suave para el texto principal
         'text-secondary': '#9CA3AF', // Gris para texto menos importante
