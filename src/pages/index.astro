@@ -1,16 +1,343 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import '../styles/tailwind.css';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Kennykrass | Desarrollador Web Full Stack">
+  <div class="container mx-auto px-4">
+    
+    <!-- Hero Section -->
+    <section id="inicio" class="min-h-screen flex items-center justify-center py-20">
+      <div class="text-center max-w-4xl">
+        <h1 class="text-6xl md:text-7xl font-bold mb-6">
+          <span class="bg-gradient-to-r from-accent to-blue-400 bg-clip-text text-transparent">
+            Kennykrass
+          </span>
+        </h1>
+        <p class="text-2xl md:text-3xl text-text-primary mb-4">
+          Desarrollador Web Full Stack
+        </p>
+        <p class="text-lg text-text-secondary mb-8 max-w-2xl mx-auto">
+          Transformo ideas en experiencias digitales excepcionales. 
+          Especializado en crear aplicaciones web modernas, escalables y con diseño intuitivo.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#proyectos" class="bg-accent text-background font-bold py-3 px-8 rounded-lg hover:bg-accent/90 transition-all transform hover:scale-105">
+            Ver Proyectos
+          </a>
+          <a href="#contacto" class="border-2 border-accent text-accent font-bold py-3 px-8 rounded-lg hover:bg-accent hover:text-background transition-all">
+            Contactar
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre Mí Section -->
+    <section id="sobre-mi" class="py-20">
+      <h2 class="text-4xl font-bold text-center mb-12">Sobre Mí</h2>
+      <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h3 class="text-2xl font-bold text-accent mb-4">Hola, soy Kenny</h3>
+          <p class="text-text-secondary mb-4">
+            Soy un desarrollador apasionado por crear soluciones digitales innovadoras. 
+            Con experiencia en desarrollo frontend y backend, me especializo en construir 
+            aplicaciones web completas desde la concepción hasta el despliegue.
+          </p>
+          <p class="text-text-secondary mb-4">
+            Mi enfoque se centra en escribir código limpio, mantener las mejores prácticas 
+            y crear experiencias de usuario excepcionales. Siempre estoy aprendiendo nuevas 
+            tecnologías y mejorando mis habilidades.
+          </p>
+          <div class="flex gap-4 mt-6">
+            <a href="#contacto" class="text-accent hover:text-accent/80 font-medium">
+              → Hablemos de tu proyecto
+            </a>
+          </div>
+        </div>
+        <div class="bg-primary p-8 rounded-lg border border-gray-700">
+          <h4 class="text-xl font-bold mb-4 text-accent">Experiencia</h4>
+          <ul class="space-y-3 text-text-secondary">
+            <li class="flex items-start">
+              <span class="text-accent mr-2">▸</span>
+              <span>5+ años desarrollando aplicaciones web</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-accent mr-2">▸</span>
+              <span>Proyectos para startups y empresas establecidas</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-accent mr-2">▸</span>
+              <span>Especialización en React, Node.js y arquitecturas cloud</span>
+            </li>
+            <li class="flex items-start">
+              <span class="text-accent mr-2">▸</span>
+              <span>Metodologías ágiles y trabajo en equipo</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proyectos Section -->
+    <section id="proyectos" class="py-20">
+      <h2 class="text-4xl font-bold text-center mb-12">Proyectos Destacados</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <article class="bg-primary rounded-lg overflow-hidden border border-gray-700 hover:border-accent transition-all group">
+          <div class="h-48 bg-gradient-to-br from-accent/20 to-blue-500/20 flex items-center justify-center">
+            <span class="text-4xl">🛒</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2 group-hover:text-accent transition-colors">E-Commerce Platform</h3>
+            <p class="text-text-secondary mb-4">
+              Plataforma completa de comercio electrónico con carrito de compras, 
+              pasarela de pagos y panel de administración.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">React</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">Node.js</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">MongoDB</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">Stripe</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="#" class="text-accent hover:underline text-sm">Ver Demo →</a>
+              <a href="#" class="text-accent hover:underline text-sm">GitHub →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="bg-primary rounded-lg overflow-hidden border border-gray-700 hover:border-accent transition-all group">
+          <div class="h-48 bg-gradient-to-br from-accent/20 to-green-500/20 flex items-center justify-center">
+            <span class="text-4xl">📊</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2 group-hover:text-accent transition-colors">Dashboard Analytics</h3>
+            <p class="text-text-secondary mb-4">
+              Dashboard interactivo con visualización de datos en tiempo real, 
+              gráficos dinámicos y exportación de reportes.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">Vue.js</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">Chart.js</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">FastAPI</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">PostgreSQL</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="#" class="text-accent hover:underline text-sm">Ver Demo →</a>
+              <a href="#" class="text-accent hover:underline text-sm">GitHub →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="bg-primary rounded-lg overflow-hidden border border-gray-700 hover:border-accent transition-all group">
+          <div class="h-48 bg-gradient-to-br from-accent/20 to-purple-500/20 flex items-center justify-center">
+            <span class="text-4xl">📱</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-2xl font-bold mb-2 group-hover:text-accent transition-colors">App de Gestión</h3>
+            <p class="text-text-secondary mb-4">
+              Aplicación web progresiva para gestión de tareas y proyectos 
+              con colaboración en tiempo real.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">Next.js</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">TypeScript</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">Prisma</span>
+              <span class="text-xs bg-accent/20 text-accent px-2 py-1 rounded">WebSockets</span>
+            </div>
+            <div class="flex gap-4">
+              <a href="#" class="text-accent hover:underline text-sm">Ver Demo →</a>
+              <a href="#" class="text-accent hover:underline text-sm">GitHub →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Servicios Section -->
+    <section id="servicios" class="py-20">
+      <h2 class="text-4xl font-bold text-center mb-12">Servicios</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        
+        <div class="bg-primary p-8 rounded-lg border border-gray-700 hover:border-accent transition-all">
+          <div class="text-4xl mb-4">💻</div>
+          <h3 class="text-xl font-bold mb-3 text-accent">Desarrollo Frontend</h3>
+          <p class="text-text-secondary">
+            Interfaces modernas y responsivas con React, Vue o Angular. 
+            Enfoque en UX/UI y rendimiento óptimo.
+          </p>
+        </div>
+
+        <div class="bg-primary p-8 rounded-lg border border-gray-700 hover:border-accent transition-all">
+          <div class="text-4xl mb-4">⚙️</div>
+          <h3 class="text-xl font-bold mb-3 text-accent">Desarrollo Backend</h3>
+          <p class="text-text-secondary">
+            APIs robustas y escalables con Node.js, Python o PHP. 
+            Arquitecturas RESTful y GraphQL.
+          </p>
+        </div>
+
+        <div class="bg-primary p-8 rounded-lg border border-gray-700 hover:border-accent transition-all">
+          <div class="text-4xl mb-4">🗄️</div>
+          <h3 class="text-xl font-bold mb-3 text-accent">Base de Datos</h3>
+          <p class="text-text-secondary">
+            Diseño y optimización de bases de datos SQL y NoSQL. 
+            MongoDB, PostgreSQL, MySQL.
+          </p>
+        </div>
+
+        <div class="bg-primary p-8 rounded-lg border border-gray-700 hover:border-accent transition-all">
+          <div class="text-4xl mb-4">☁️</div>
+          <h3 class="text-xl font-bold mb-3 text-accent">DevOps & Cloud</h3>
+          <p class="text-text-secondary">
+            Despliegue y mantenimiento en AWS, Google Cloud o Azure. 
+            CI/CD, Docker, Kubernetes.
+          </p>
+        </div>
+
+        <div class="bg-primary p-8 rounded-lg border border-gray-700 hover:border-accent transition-all">
+          <div class="text-4xl mb-4">📱</div>
+          <h3 class="text-xl font-bold mb-3 text-accent">Aplicaciones PWA</h3>
+          <p class="text-text-secondary">
+            Desarrollo de Progressive Web Apps con funcionalidades 
+            offline y notificaciones push.
+          </p>
+        </div>
+
+        <div class="bg-primary p-8 rounded-lg border border-gray-700 hover:border-accent transition-all">
+          <div class="text-4xl mb-4">🔍</div>
+          <h3 class="text-xl font-bold mb-3 text-accent">Consultoría</h3>
+          <p class="text-text-secondary">
+            Análisis de requerimientos, arquitectura de soluciones 
+            y mejora de procesos existentes.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Stack Tecnológico Section -->
+    <section id="tecnologias" class="py-20">
+      <h2 class="text-4xl font-bold text-center mb-12">Stack Tecnológico</h2>
+      <div class="max-w-4xl mx-auto">
+        
+        <div class="mb-8">
+          <h3 class="text-xl font-bold mb-4 text-accent">Frontend</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">React</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Vue.js</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Angular</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">TypeScript</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Next.js</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Tailwind CSS</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Sass</span>
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="text-xl font-bold mb-4 text-accent">Backend</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Node.js</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Express</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Python</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Django</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">FastAPI</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">PHP</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Laravel</span>
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="text-xl font-bold mb-4 text-accent">Base de Datos & Cloud</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">MongoDB</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">PostgreSQL</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">MySQL</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Redis</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">AWS</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Docker</span>
+            <span class="bg-primary px-4 py-2 rounded-lg border border-gray-700">Git</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-20">
+      <h2 class="text-4xl font-bold text-center mb-12">Contacto</h2>
+      <div class="max-w-2xl mx-auto">
+        <div class="bg-primary p-8 rounded-lg border border-gray-700">
+          <p class="text-text-secondary text-center mb-8">
+            ¿Tienes un proyecto en mente? Me encantaría escucharte y ver cómo puedo ayudarte 
+            a llevarlo al siguiente nivel.
+          </p>
+          
+          <form class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium mb-2">Nombre</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                class="w-full px-4 py-2 bg-background border border-gray-700 rounded-lg focus:border-accent focus:outline-none"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium mb-2">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="w-full px-4 py-2 bg-background border border-gray-700 rounded-lg focus:border-accent focus:outline-none"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium mb-2">Mensaje</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="4" 
+                class="w-full px-4 py-2 bg-background border border-gray-700 rounded-lg focus:border-accent focus:outline-none"
+                required
+              ></textarea>
+            </div>
+
+            <button 
+              type="submit" 
+              class="w-full bg-accent text-background font-bold py-3 px-6 rounded-lg hover:bg-accent/90 transition-all"
+            >
+              Enviar Mensaje
+            </button>
+          </form>
+
+          <div class="mt-8 pt-8 border-t border-gray-700">
+            <p class="text-center text-text-secondary">
+              También puedes contactarme directamente:
+            </p>
+            <div class="flex justify-center gap-6 mt-4">
+              <a href="mailto:contacto@kennykrass.com" class="text-accent hover:underline">
+                contacto@kennykrass.com
+              </a>
+              <a href="https://linkedin.com/in/kennykrass" class="text-accent hover:underline">
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

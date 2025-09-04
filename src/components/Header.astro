@@ -1,0 +1,72 @@
+---
+const navItems = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#sobre-mi', label: 'Sobre Mí' },
+  { href: '#proyectos', label: 'Proyectos' },
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#tecnologias', label: 'Tecnologías' },
+  { href: '#contacto', label: 'Contacto' }
+];
+---
+
+<header class="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-gray-800 z-50">
+  <nav class="container mx-auto px-4 py-4">
+    <div class="flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-accent">
+        Kennykrass
+      </a>
+      
+      <!-- Desktop Menu -->
+      <ul class="hidden md:flex space-x-8">
+        {navItems.map((item) => (
+          <li>
+            <a 
+              href={item.href} 
+              class="text-text-secondary hover:text-accent transition-colors duration-300"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden text-text-primary">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <ul id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
+      {navItems.map((item) => (
+        <li>
+          <a 
+            href={item.href} 
+            class="block text-text-secondary hover:text-accent transition-colors duration-300 py-2"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu when clicking a link
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+</script>
