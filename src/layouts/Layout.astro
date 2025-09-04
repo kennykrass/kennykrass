@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 interface Props {
 	title: string;
@@ -23,12 +24,13 @@ const { title } = Astro.props;
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-background text-text-primary font-[Inter,sans-serif]">
+	<body class="bg-white dark:bg-background text-gray-900 dark:text-text-primary font-[Inter,sans-serif] transition-colors duration-300">
 		<Header />
 		<main class="pt-16">
 			<slot />
 		</main>
 		<Footer />
+		<ThemeToggle />
 	</body>
 </html>
 

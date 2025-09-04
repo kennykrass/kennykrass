@@ -9,7 +9,7 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-gray-800 z-50">
+<header class="fixed top-0 w-full bg-white/95 dark:bg-background/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 z-50">
   <nav class="container mx-auto px-4 py-4">
     <div class="flex justify-between items-center">
       <a href="/" class="flex items-center gap-3 group">
@@ -18,7 +18,7 @@ const navItems = [
           alt="Kennykrass Logo" 
           class="h-10 w-10 object-contain group-hover:scale-110 transition-transform duration-300"
         />
-        <span class="text-2xl font-bold text-accent">Kennykrass</span>
+        <span class="text-2xl font-bold text-blue-600 dark:text-accent">Kennykrass</span>
       </a>
       
       <!-- Desktop Menu -->
@@ -27,7 +27,7 @@ const navItems = [
           <li>
             <a 
               href={item.href} 
-              class="text-text-secondary hover:text-accent transition-colors duration-300"
+              class="text-gray-600 dark:text-text-secondary hover:text-blue-600 dark:hover:text-accent transition-colors duration-300"
             >
               {item.label}
             </a>

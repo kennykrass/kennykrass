@@ -11,7 +11,7 @@ const socialLinks = [
 ];
 ---
 
-<footer class="bg-primary border-t border-gray-800 mt-20">
+<footer class="bg-gray-50 dark:bg-primary border-t border-gray-200 dark:border-gray-800 mt-20">
   <div class="container mx-auto px-4 py-8">
     <div class="flex flex-col md:flex-row justify-between items-center">
       <div class="mb-4 md:mb-0">
@@ -21,9 +21,9 @@ const socialLinks = [
             alt="Kennykrass Logo" 
             class="h-8 w-8 object-contain"
           />
-          <h3 class="text-xl font-bold text-accent">Kennykrass</h3>
+          <h3 class="text-xl font-bold text-blue-600 dark:text-accent">Kennykrass</h3>
         </div>
-        <p class="text-text-secondary text-sm mt-2">Desarrollo de Software y Soluciones Digitales</p>
+        <p class="text-gray-600 dark:text-text-secondary text-sm mt-2">Desarrollo de Software y Soluciones Digitales</p>
       </div>
 
       <div class="flex space-x-6">
@@ -32,7 +32,7 @@ const socialLinks = [
             href={link.url} 
             target="_blank" 
             rel="noopener noreferrer" 
-            class="text-text-secondary hover:text-accent transition-colors"
+            class="text-gray-600 dark:text-text-secondary hover:text-accent transition-colors"
             aria-label={link.name}
           >
             {link.icon === 'github' && (
@@ -70,8 +70,8 @@ const socialLinks = [
       </div>
     </div>
 
-    <div class="mt-8 pt-8 border-t border-gray-700 text-center">
-      <p class="text-text-secondary text-sm">
+    <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+      <p class="text-gray-600 dark:text-text-secondary text-sm">
         © {currentYear} Kennykrass. Todos los derechos reservados.
       </p>
     </div>
