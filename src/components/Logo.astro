@@ -2,18 +2,20 @@
 const { class: className = "" } = Astro.props;
 ---
 
-<div class={`logo-container ${className}`}>
+<div class={`logo-container relative ${className}`}>
   <!-- Logo para modo oscuro -->
   <img 
     src="/logo-cropped.jpeg" 
     alt="Kennykrass Logo" 
-    class="logo-dark block dark:block hidden"
+    class="logo-dark absolute inset-0 w-full h-full object-contain opacity-0 dark:opacity-100 transition-opacity duration-300"
+    loading="eager"
   />
   <!-- Logo para modo claro -->
   <img 
     src="/logo-light-cropped.png" 
     alt="Kennykrass Logo" 
-    class="logo-light dark:hidden block"
+    class="logo-light absolute inset-0 w-full h-full object-contain opacity-100 dark:opacity-0 transition-opacity duration-300"
+    loading="eager"
   />
 </div>
 
@@ -22,10 +24,15 @@ const { class: className = "" } = Astro.props;
     position: relative;
     display: inline-block;
   }
-  
-  .logo-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
 </style>
+
+<script>
+  // Precargar ambos logos al inicio
+  if (typeof window !== 'undefined') {
+    const logoDark = new Image();
+    logoDark.src = '/logo-cropped.jpeg';
+    
+    const logoLight = new Image();
+    logoLight.src = '/logo-light-cropped.png';
+  }
+</script>

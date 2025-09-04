@@ -30,10 +30,11 @@
 
 <script>
   const theme = (() => {
+    // Comentado para respetar la elección del usuario
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
       return localStorage.getItem('theme');
     }
-    // Siempre iniciar en modo oscuro, ignorar preferencias del sistema
+    // Siempre iniciar en modo oscuro para nuevos visitantes
     return 'dark';
   })();
 

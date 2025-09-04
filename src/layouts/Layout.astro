@@ -23,8 +23,12 @@ const { title } = Astro.props;
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+		
+		<!-- Precargar logos para transición suave -->
+		<link rel="preload" as="image" href="/logo-cropped.jpeg">
+		<link rel="preload" as="image" href="/logo-light-cropped.png">
 	</head>
-	<body class="bg-white dark:bg-background text-gray-900 dark:text-text-primary font-[Inter,sans-serif] transition-colors duration-300">
+	<body class="bg-white dark:bg-background text-gray-900 dark:text-text-primary font-[Inter,sans-serif] transition-all duration-300">
 		<Header />
 		<main class="pt-16">
 			<slot />
