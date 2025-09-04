@@ -1,0 +1,31 @@
+---
+const { class: className = "" } = Astro.props;
+---
+
+<div class={`logo-container ${className}`}>
+  <!-- Logo para modo oscuro -->
+  <img 
+    src="/logo-cropped.jpeg" 
+    alt="Kennykrass Logo" 
+    class="logo-dark block dark:block hidden"
+  />
+  <!-- Logo para modo claro -->
+  <img 
+    src="/logo-light.png" 
+    alt="Kennykrass Logo" 
+    class="logo-light dark:hidden block"
+  />
+</div>
+
+<style>
+  .logo-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>

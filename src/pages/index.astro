@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
 import '../styles/tailwind.css';
 ---
 
@@ -10,11 +11,7 @@ import '../styles/tailwind.css';
     <section id="inicio" class="min-h-screen flex items-center justify-center py-20">
       <div class="text-center max-w-4xl">
         <div class="mb-8 flex justify-center">
-          <img 
-            src="/logo-transparent.png" 
-            alt="Kennykrass Logo" 
-            class="h-48 w-48 md:h-64 md:w-64 lg:h-72 lg:w-72 object-contain animate-pulse"
-          />
+          <Logo class="h-48 w-48 md:h-64 md:w-64 lg:h-72 lg:w-72 animate-pulse" />
         </div>
         <h1 class="text-6xl md:text-7xl font-bold mb-6">
           <span class="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-accent dark:to-blue-400 bg-clip-text text-transparent">
