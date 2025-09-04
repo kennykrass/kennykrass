@@ -7,11 +7,18 @@ export default {
     'text-blue-700', 
     'bg-blue-100',
     'bg-blue-600',
+    'bg-white',
     'hover:text-blue-600',
     'hover:text-blue-700',
     'hover:bg-blue-600',
     'border-blue-600',
-    'dark:border-blue-600'
+    'border-gray-400',
+    'focus:border-blue-600',
+    'text-gray-900',
+    'dark:border-blue-600',
+    'dark:focus:border-accent',
+    'dark:bg-background',
+    'dark:text-text-primary'
   ],
   theme: {
     extend: {
