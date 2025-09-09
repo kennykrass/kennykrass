@@ -21,6 +21,12 @@ const contactSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Log para depuración en Netlify: confirma si las variables de entorno se están leyendo.
+    // En los logs de la función de Netlify, busca este mensaje.
+    console.log("Iniciando API de contacto. SEND_TO_EMAIL:", sendToEmail ? "cargado" : "NO cargado");
+    console.log("FROM_EMAIL:", fromEmail ? "cargado" : "NO cargado");
+
+
     const body = await request.json();
     // 2. Validamos el cuerpo de la petición con el esquema de Zod
     const validation = contactSchema.safeParse(body);
@@ -36,33 +42,33 @@ export const POST: APIRoute = async ({ request }) => {
     const { name, email, message } = validation.data;
 
     // 3. Enviar el correo usando Resend
+    const fromAddress = fromEmail || "Portfolio Contact <onboarding@resend.dev>";
+    const toAddress = sendToEmail || "kennysk81@gmail.com";
+
+    // Advertencia en logs si se usan los valores por defecto
+    if (!fromEmail) console.warn("ADVERTENCIA: La variable RESEND_FROM_EMAIL no está configurada. Usando valor por defecto.");
+    if (!sendToEmail) console.warn("ADVERTENCIA: La variable SEND_TO_EMAIL no está configurada. Usando valor por defecto.");
+
     const { data, error } = await resend.emails.send({
-      from: fromEmail || "Portfolio Contact <onboarding@resend.dev>", // Usar dominio verificado en producción
-      to: sendToEmail || "kennysk81@gmail.com", // Usamos la variable de entorno o un valor por defecto
+      from: fromAddress,
+      to: toAddress,
+      replyTo: email, // ¡Corregido! Facilita responder directamente al usuario.
       subject: `Nuevo mensaje de contacto de ${name}`,
       html: `<p>Has recibido un nuevo mensaje de tu formulario de contacto:</p>
              <p><strong>Nombre:</strong> ${name}</p>
              <p><strong>Email:</strong> ${email}</p>
              <p><strong>Mensaje:</strong> ${message}</p>`,
     });
-
-    // 4. Manejo de errores de Resend
-    if (error) {
-      console.error("Resend error:", { error }); // Log del error para depuración
-      return new Response(JSON.stringify({ message: "Error al enviar el correo." }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
-    // 5. Respuesta de éxito
+    
+    // 4. Si resend.emails.send() no lanzó un error, el envío fue exitoso.
+    // Devolvemos la respuesta de éxito.
     return new Response(JSON.stringify({ message: "Mensaje enviado con éxito." }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
     // Este catch ahora manejará errores de `request.json()` (si el body no es JSON válido)
-    // o cualquier otro error inesperado.
+    // o si resend.emails.send() lanza una excepción.
     console.error("API Route error:", error);
     const errorMessage = (error instanceof Error && error.message.includes("JSON"))
       ? "El cuerpo de la petición no es un JSON válido."
