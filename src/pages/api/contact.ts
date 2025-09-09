@@ -2,12 +2,6 @@ import type { APIRoute } from "astro";
 import { z } from "zod";
 import { Resend } from 'resend';
 
-console.log('Intentando leer la API Key:', import.meta.env.RESEND_API_KEY);
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
-
-
-
-
 // 1. Definimos un esquema de validación con Zod
 const contactSchema = z.object({
   name: z.string({ required_error: "El nombre es obligatorio." }).min(1, { message: "El nombre no puede estar vacío." }),
@@ -17,6 +11,12 @@ const contactSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    const apiKey = import.meta.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error("La clave de API de Resend no está configurada en el servidor.");
+    }
+    const resend = new Resend(apiKey);
+
     const body = await request.json();
 
     // 2. Validamos el cuerpo de la petición con el esquema de Zod
@@ -58,7 +58,11 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error(error); // Log del error para depuración
-    return new Response(JSON.stringify({ message: "Error interno del servidor." }), { status: 500 });
+    console.error(error);
+    const errorMessage = error instanceof Error ? error.message : "Error interno del servidor.";
+    return new Response(JSON.stringify({ message: errorMessage }), { 
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 };
