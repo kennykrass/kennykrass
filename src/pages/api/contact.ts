@@ -1,9 +1,12 @@
 import type { APIRoute } from "astro";
-import { Resend } from "resend";
 import { z } from "zod";
+import { Resend } from 'resend';
 
-// Obtenemos la clave de API desde las variables de entorno
+console.log('Intentando leer la API Key:', import.meta.env.RESEND_API_KEY);
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
+
+
+
 
 // 1. Definimos un esquema de validación con Zod
 const contactSchema = z.object({
