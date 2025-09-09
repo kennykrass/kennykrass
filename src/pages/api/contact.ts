@@ -10,6 +10,7 @@ if (!apiKey) {
 }
 const resend = new Resend(apiKey);
 const sendToEmail = import.meta.env.SEND_TO_EMAIL;
+const fromEmail = import.meta.env.RESEND_FROM_EMAIL;
 
 // 1. Definimos un esquema de validación con Zod
 const contactSchema = z.object({
@@ -36,7 +37,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // 3. Enviar el correo usando Resend
     const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>", // DEBE ser un dominio verificado en Resend
+      from: fromEmail || "Portfolio Contact <onboarding@resend.dev>", // Usar dominio verificado en producción
       to: sendToEmail || "kennysk81@gmail.com", // Usamos la variable de entorno o un valor por defecto
       subject: `Nuevo mensaje de contacto de ${name}`,
       html: `<p>Has recibido un nuevo mensaje de tu formulario de contacto:</p>
