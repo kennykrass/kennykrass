@@ -2,6 +2,15 @@ import type { APIRoute } from "astro";
 import { z } from "zod";
 import { Resend } from 'resend';
 
+// Se comprueba la API Key y se inicializa Resend UNA SOLA VEZ fuera de la petición.
+// Esto es más eficiente y permite que la aplicación falle rápido si la clave no está configurada.
+const apiKey = import.meta.env.RESEND_API_KEY;
+if (!apiKey) {
+  throw new Error("La variable de entorno RESEND_API_KEY no está configurada en el servidor.");
+}
+const resend = new Resend(apiKey);
+const sendToEmail = import.meta.env.SEND_TO_EMAIL;
+
 // 1. Definimos un esquema de validación con Zod
 const contactSchema = z.object({
   name: z.string({ required_error: "El nombre es obligatorio." }).min(1, { message: "El nombre no puede estar vacío." }),
@@ -11,15 +20,7 @@ const contactSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    // Se comprueba la API Key y se inicializa Resend DENTRO de la petición
-    const apiKey = import.meta.env.RESEND_API_KEY;
-    if (!apiKey) {
-      throw new Error("La clave de API de Resend no está configurada en el servidor.");
-    }
-    const resend = new Resend(apiKey);
-
     const body = await request.json();
-
     // 2. Validamos el cuerpo de la petición con el esquema de Zod
     const validation = contactSchema.safeParse(body);
 
@@ -35,8 +36,8 @@ export const POST: APIRoute = async ({ request }) => {
 
     // 3. Enviar el correo usando Resend
     const { data, error } = await resend.emails.send({
-      from: "onboarding@resend.dev", // DEBE ser un dominio verificado en Resend
-      to: "kennysk81@gmail.com",
+      from: "Portfolio Contact <onboarding@resend.dev>", // DEBE ser un dominio verificado en Resend
+      to: sendToEmail || "kennysk81@gmail.com", // Usamos la variable de entorno o un valor por defecto
       subject: `Nuevo mensaje de contacto de ${name}`,
       html: `<p>Has recibido un nuevo mensaje de tu formulario de contacto:</p>
              <p><strong>Nombre:</strong> ${name}</p>
@@ -46,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // 4. Manejo de errores de Resend
     if (error) {
-      console.error({ error }); // Log del error para depuración
+      console.error("Resend error:", { error }); // Log del error para depuración
       return new Response(JSON.stringify({ message: "Error al enviar el correo." }), {
         status: 500,
         headers: { "Content-Type": "application/json" },
@@ -59,8 +60,12 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error(error);
-    const errorMessage = error instanceof Error ? error.message : "Error interno del servidor.";
+    // Este catch ahora manejará errores de `request.json()` (si el body no es JSON válido)
+    // o cualquier otro error inesperado.
+    console.error("API Route error:", error);
+    const errorMessage = (error instanceof Error && error.message.includes("JSON"))
+      ? "El cuerpo de la petición no es un JSON válido."
+      : "Error interno del servidor.";
     return new Response(JSON.stringify({ message: errorMessage }), { 
       status: 500,
       headers: { "Content-Type": "application/json" },
