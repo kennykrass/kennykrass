@@ -1,0 +1,41 @@
+# Archivo de configuración para despliegues de gcloud.
+# Ignora este mismo archivo para no incluirlo en el despliegue.
+.gcloudignore
+
+# Ignora todo el historial y la configuración de Git.
+.git/
+.gitignore
+
+# Dependencias de desarrollo que se instalarán en la nube.
+# Subir esta carpeta haría el despliegue extremadamente lento e innecesario.
+node_modules/
+
+# Directorio de build local. La compilación debe ocurrir en el entorno de la nube
+# (Cloud Build) o el resultado no es necesario si se sirve desde el código fuente.
+dist/
+
+# Archivos de caché y tipos generados por Astro para desarrollo local.
+.astro/
+
+# Archivos de entorno y variables secretas.
+# NUNCA se deben subir secretos al control de versiones o a la nube.
+# Estos se deben gestionar con Secret Manager o variables de entorno en el servicio.
+.env
+.env*
+!.env.example
+
+# Logs de errores y depuración.
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Archivos específicos del sistema operativo y del editor de código.
+.DS_Store
+.vscode/
+.idea/
+
+# Archivos de documentación y diseño que no son parte de la aplicación final.
+README.md
+design_system.md
