@@ -11,6 +11,7 @@ const contactSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Se comprueba la API Key y se inicializa Resend DENTRO de la petición
     const apiKey = import.meta.env.RESEND_API_KEY;
     if (!apiKey) {
       throw new Error("La clave de API de Resend no está configurada en el servidor.");
