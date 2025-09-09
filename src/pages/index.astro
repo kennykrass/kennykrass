@@ -278,7 +278,8 @@ import '../styles/tailwind.css';
             a llevarlo al siguiente nivel.
           </p>
           
-          <form class="space-y-6">
+          <div id="form-response" class="text-center mb-4"></div>
+          <form id="contact-form" class="space-y-6">
             <div>
               <label for="name" class="block text-sm font-medium mb-2">Nombre</label>
               <input 
@@ -345,3 +346,53 @@ import '../styles/tailwind.css';
     scroll-behavior: smooth;
   }
 </style>
+
+<script>
+  // 1. Seleccionar el formulario y el div de respuesta
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const formResponse = document.getElementById('form-response') as HTMLDivElement;
+
+  // 2. Interceptar el evento 'submit'
+  form.addEventListener('submit', async (event) => {
+    // 3. Prevenir el comportamiento por defecto (recarga de página)
+    event.preventDefault();
+
+    // Mostrar un mensaje de carga
+    formResponse.textContent = 'Enviando...';
+    formResponse.className = 'text-center mb-4 text-yellow-400';
+
+    // 4. Obtener los datos del formulario
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      // 5. Enviar los datos al endpoint de la API
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // 6. Asegurarse de que los datos se envíen como JSON
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      // 7. Manejar la respuesta
+      if (response.ok) {
+        // Éxito: mostrar mensaje y limpiar el formulario
+        formResponse.textContent = result.message;
+        formResponse.className = 'text-center mb-4 text-green-400';
+        form.reset();
+      } else {
+        // Error de la API: mostrar el mensaje de error
+        const errorMessage = result.message || Object.values(result.errors).flat().join(' ');
+        throw new Error(errorMessage);
+      }
+    } catch (error) {
+      // Error de red u otro: mostrar el mensaje de error
+      formResponse.textContent = error instanceof Error ? error.message : 'Ocurrió un error inesperado.';
+      formResponse.className = 'text-center mb-4 text-red-400';
+    }
+  });
+</script>
