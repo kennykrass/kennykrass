@@ -1,15 +1,25 @@
 ---
+interface Props {
+  variant?: 'floating' | 'inline';
+  class?: string;
+  id?: string;
+}
+
+const { variant = 'floating', class: className = '', id = 'theme-toggle' } = Astro.props as Props;
+const isFloating = variant !== 'inline';
 ---
 
 <button
-  id="theme-toggle"
+  id={id}
   type="button"
-  class="fixed bottom-8 right-8 p-3 rounded-full bg-primary border border-gray-700 hover:border-accent transition-all duration-300 z-50 group"
+  class={`${isFloating
+    ? 'fixed bottom-8 right-8 z-50 p-3 rounded-full bg-primary border border-gray-700 hover:border-accent'
+    : 'inline-flex items-center justify-center p-2 rounded-md border border-gray-300 dark:border-gray-700 hover:border-accent'} group transition-all duration-300 ${className}`}
   aria-label="Toggle theme"
 >
   <!-- Sun icon (light mode) -->
   <svg
-    id="theme-toggle-light-icon"
+    id={`${id}-light-icon`}
     class="w-6 h-6 text-yellow-400 hidden group-hover:scale-110 transition-transform"
     fill="currentColor"
     viewBox="0 0 24 24"
@@ -19,7 +29,7 @@
 
   <!-- Moon icon (dark mode) -->
   <svg
-    id="theme-toggle-dark-icon"
+    id={`${id}-dark-icon`}
     class="w-6 h-6 text-accent group-hover:scale-110 transition-transform"
     fill="currentColor"
     viewBox="0 0 24 24"
@@ -29,6 +39,10 @@
 </button>
 
 <script>
+  const elementId = ${JSON.stringify((Astro.props as any)?.id || 'theme-toggle')};
+  const lightIconId = `${elementId}-light-icon`;
+  const darkIconId = `${elementId}-dark-icon`;
+
   const theme = (() => {
     // Comentado para respetar la elección del usuario
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -58,8 +72,8 @@
   };
 
   const updateIcon = (isDark) => {
-    const lightIcon = document.getElementById('theme-toggle-light-icon');
-    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById(lightIconId);
+    const darkIcon = document.getElementById(darkIconId);
     
     if (isDark) {
       lightIcon?.classList.add('hidden');
@@ -73,5 +87,5 @@
   // Initial icon setup
   updateIcon(theme === 'dark');
 
-  document.getElementById('theme-toggle')?.addEventListener('click', handleToggleClick);
+  document.getElementById(elementId)?.addEventListener('click', handleToggleClick);
 </script>

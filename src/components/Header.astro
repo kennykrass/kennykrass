@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 const navItems = [
   { href: '#inicio', label: 'Inicio' },
@@ -20,7 +21,7 @@ const navItems = [
       </a>
       
       <!-- Desktop Menu -->
-      <ul class="hidden md:flex space-x-8">
+      <ul class="hidden md:flex space-x-8 items-center">
         {navItems.map((item) => (
           <li>
             <a 
@@ -31,14 +32,20 @@ const navItems = [
             </a>
           </li>
         ))}
+        <li>
+          <ThemeToggle variant="inline" id="theme-toggle-desktop" />
+        </li>
       </ul>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="md:hidden text-text-primary">
+      <div class="flex items-center gap-3">
+        <ThemeToggle variant="inline" id="theme-toggle-mobile" class="md:hidden" />
+        <button id="mobile-menu-btn" class="md:hidden text-text-primary">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
-      </button>
+        </button>
+      </div>
     </div>
 
     <!-- Mobile Menu -->
