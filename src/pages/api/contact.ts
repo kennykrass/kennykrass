@@ -85,3 +85,18 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 };
+
+// Manejo explícito de GET para evitar que Netlify/redirects devuelvan HTML
+// si algún redireccionamiento convierte un POST en GET. Esto garantiza JSON.
+export const GET: APIRoute = async () => {
+  return new Response(
+    JSON.stringify({ message: 'Endpoint activo. Usa método POST para enviar el formulario.' }),
+    {
+      status: 405,
+      headers: {
+        'Content-Type': 'application/json',
+        'Allow': 'POST',
+      },
+    }
+  );
+};
