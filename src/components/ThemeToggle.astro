@@ -38,8 +38,9 @@ const isFloating = variant !== 'inline';
   </svg>
 </button>
 
-<script>
-  const elementId = ${JSON.stringify((Astro.props as any)?.id || 'theme-toggle')};
+<script is:inline>
+  // Inyectar el id desde props en tiempo de build
+  const elementId = {JSON.stringify(id)};
   const lightIconId = `${elementId}-light-icon`;
   const darkIconId = `${elementId}-dark-icon`;
 
