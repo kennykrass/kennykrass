@@ -1,14 +1,11 @@
 import type { APIRoute } from "astro";
+export const prerender = false;
 import { z } from "zod";
 import { Resend } from 'resend';
 
-// Se comprueba la API Key y se inicializa Resend UNA SOLA VEZ fuera de la petición.
-// Esto es más eficiente y permite que la aplicación falle rápido si la clave no está configurada.
+// Leer variables de entorno a nivel de módulo es seguro, pero NO lanzar errores aquí.
+// Si faltan, devolvemos un JSON consistente desde el handler.
 const apiKey = import.meta.env.RESEND_API_KEY;
-if (!apiKey) {
-  throw new Error("La variable de entorno RESEND_API_KEY no está configurada en el servidor.");
-}
-const resend = new Resend(apiKey);
 const sendToEmail = import.meta.env.SEND_TO_EMAIL;
 const fromEmail = import.meta.env.RESEND_FROM_EMAIL;
 
@@ -21,6 +18,14 @@ const contactSchema = z.object({
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Validación temprana de variables de entorno, siempre devolviendo JSON
+    if (!apiKey) {
+      return new Response(JSON.stringify({ 
+        message: "Configuración faltante: RESEND_API_KEY no está definida en el servidor.",
+      }), { status: 500, headers: { "Content-Type": "application/json" } });
+    }
+
+    const resend = new Resend(apiKey);
     // Log para depuración en Netlify: confirma si las variables de entorno se están leyendo.
     // En los logs de la función de Netlify, busca este mensaje.
     console.log("Iniciando API de contacto. SEND_TO_EMAIL:", sendToEmail ? "cargado" : "NO cargado");
@@ -49,7 +54,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (!fromEmail) console.warn("ADVERTENCIA: La variable RESEND_FROM_EMAIL no está configurada. Usando valor por defecto.");
     if (!sendToEmail) console.warn("ADVERTENCIA: La variable SEND_TO_EMAIL no está configurada. Usando valor por defecto.");
 
-    const { data, error } = await resend.emails.send({
+    const { data } = await resend.emails.send({
       from: fromAddress,
       to: toAddress,
       replyTo: email, // ¡Corregido! Facilita responder directamente al usuario.
@@ -70,11 +75,12 @@ export const POST: APIRoute = async ({ request }) => {
     // Este catch ahora manejará errores de `request.json()` (si el body no es JSON válido)
     // o si resend.emails.send() lanza una excepción.
     console.error("API Route error:", error);
-    const errorMessage = (error instanceof Error && error.message.includes("JSON"))
-      ? "El cuerpo de la petición no es un JSON válido."
+    const isJsonParse = error instanceof Error && /JSON|Unexpected end of JSON/i.test(error.message);
+    const message = isJsonParse
+      ? "El cuerpo de la petición está vacío o no es un JSON válido."
       : "Error interno del servidor.";
-    return new Response(JSON.stringify({ message: errorMessage }), { 
-      status: 500,
+    return new Response(JSON.stringify({ message }), {
+      status: isJsonParse ? 400 : 500,
       headers: { "Content-Type": "application/json" },
     });
   }

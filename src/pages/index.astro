@@ -376,7 +376,10 @@ import '../styles/tailwind.css';
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
+      // Intentar parsear JSON sólo si el servidor lo devuelve
+      const contentType = response.headers.get('content-type') || '';
+      const isJson = contentType.includes('application/json');
+      const result = isJson ? await response.json() : { message: await response.text() };
 
       // 7. Manejar la respuesta
       if (response.ok) {
@@ -385,8 +388,8 @@ import '../styles/tailwind.css';
         formResponse.className = 'text-center mb-4 text-green-400';
         form.reset();
       } else {
-        // Error de la API: mostrar el mensaje de error
-        const errorMessage = result.message || Object.values(result.errors).flat().join(' ');
+        // Error de la API o respuesta no-JSON: mostrar el mensaje
+        const errorMessage = result.message || (result.errors ? Object.values(result.errors).flat().join(' ') : 'Error inesperado del servidor.');
         throw new Error(errorMessage);
       }
     } catch (error) {
