@@ -11,6 +11,7 @@ const isFloating = variant !== 'inline';
 
 <button
   id={id}
+  data-theme-toggle={id}
   type="button"
   class={`${isFloating
     ? 'fixed bottom-8 right-8 z-50 p-3 rounded-full bg-primary border border-gray-700 hover:border-accent'
@@ -38,55 +39,56 @@ const isFloating = variant !== 'inline';
   </svg>
 </button>
 
-<script is:inline>
-  // Inyectar el id desde props en tiempo de build
-  const elementId = {JSON.stringify(id)};
-  const lightIconId = `${elementId}-light-icon`;
-  const darkIconId = `${elementId}-dark-icon`;
-
-  const theme = (() => {
-    // Comentado para respetar la elección del usuario
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme');
+<script>
+  // Estado inicial: respetar localStorage si existe; si no, dark
+  const initialTheme = (() => {
+    try {
+      const saved = localStorage.getItem('theme');
+      return saved ? saved : 'dark';
+    } catch (_) {
+      return 'dark';
     }
-    // Siempre iniciar en modo oscuro para nuevos visitantes
-    return 'dark';
   })();
 
-  if (theme === 'light') {
-    document.documentElement.classList.remove('dark');
-  } else {
-    document.documentElement.classList.add('dark');
+  (function applyInitial() {
+    const el = document.documentElement;
+    if (initialTheme === 'light') el.classList.remove('dark');
+    else el.classList.add('dark');
+    try { localStorage.setItem('theme', initialTheme); } catch (_) {}
+  })();
+
+  function updateIconById(baseId, isDark) {
+    const lightIcon = document.getElementById(baseId + '-light-icon');
+    const darkIcon = document.getElementById(baseId + '-dark-icon');
+    if (!lightIcon || !darkIcon) return;
+    if (isDark) {
+      lightIcon.classList.add('hidden');
+      darkIcon.classList.remove('hidden');
+    } else {
+      lightIcon.classList.remove('hidden');
+      darkIcon.classList.add('hidden');
+    }
   }
 
-  window.localStorage.setItem('theme', theme);
-
-  const handleToggleClick = () => {
-    const element = document.documentElement;
-    element.classList.toggle('dark');
-
-    const isDark = element.classList.contains('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    
-    // Update icon visibility
-    updateIcon(isDark);
-  };
-
-  const updateIcon = (isDark) => {
-    const lightIcon = document.getElementById(lightIconId);
-    const darkIcon = document.getElementById(darkIconId);
-    
-    if (isDark) {
-      lightIcon?.classList.add('hidden');
-      darkIcon?.classList.remove('hidden');
-    } else {
-      lightIcon?.classList.remove('hidden');
-      darkIcon?.classList.add('hidden');
-    }
-  };
-
-  // Initial icon setup
-  updateIcon(theme === 'dark');
-
-  document.getElementById(elementId)?.addEventListener('click', handleToggleClick);
+  // Inicializar todos los toggles presentes
+  (function initToggles() {
+    const toggles = document.querySelectorAll('[data-theme-toggle]');
+    const isDark = document.documentElement.classList.contains('dark');
+    toggles.forEach((btn) => {
+      const baseId = btn.getAttribute('data-theme-toggle');
+      if (!baseId) return;
+      updateIconById(baseId, isDark);
+      btn.addEventListener('click', () => {
+        const root = document.documentElement;
+        root.classList.toggle('dark');
+        const nowDark = root.classList.contains('dark');
+        try { localStorage.setItem('theme', nowDark ? 'dark' : 'light'); } catch (_) {}
+        // Actualiza todos los toggles para reflejar el estado
+        document.querySelectorAll('[data-theme-toggle]').forEach((b) => {
+          const idAttr = b.getAttribute('data-theme-toggle');
+          if (idAttr) updateIconById(idAttr, nowDark);
+        });
+      });
+    });
+  })();
 </script>
