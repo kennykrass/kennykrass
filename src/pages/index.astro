@@ -2,6 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Logo from '../components/Logo.astro';
 import '../styles/tailwind.css';
+
+// Variables públicas para WhatsApp (opcional)
+const WHATSAPP_NUMBER = import.meta.env.PUBLIC_WHATSAPP_NUMBER as string | undefined;
+const WHATSAPP_TEXT = import.meta.env.PUBLIC_WHATSAPP_TEXT as string | undefined;
+const phone = (WHATSAPP_NUMBER || '').toString().replace(/\D/g, '');
+const preset = encodeURIComponent(WHATSAPP_TEXT || 'Hola Kenny, vi tu portafolio y me gustaría hablar sobre un proyecto.');
 ---
 
 <Layout title="Kennykrass | Desarrollador Web Full Stack">
@@ -330,6 +336,11 @@ import '../styles/tailwind.css';
               <a href="https://linkedin.com/in/kennykrass" class="text-blue-600 dark:text-accent hover:underline">
                 LinkedIn
               </a>
+              {phone && (
+                <a href={`https://wa.me/${phone}?text=${preset}`} class="text-blue-600 dark:text-accent hover:underline">
+                  WhatsApp
+                </a>
+              )}
             </div>
           </div>
         </div>
