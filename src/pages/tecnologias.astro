@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/tailwind.css';
+
+const title = 'Tecnologías | Kennykrass';
+---
+
+<Layout title={title}>
+  <section class="py-16">
+    <div class="container mx-auto px-4 max-w-5xl">
+      <header class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold">
+          <span class="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-accent dark:to-blue-400 bg-clip-text text-transparent">Stack Tecnológico</span>
+        </h1>
+        <p class="mt-3 text-text-secondary">Tecnologías que uso para construir productos robustos y escalables.</p>
+      </header>
+
+      <div class="space-y-10">
+        <!-- Frontend -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-accent">Frontend</h2>
+          <div class="flex flex-wrap gap-3">
+            {['React', 'Vue.js', 'Angular', 'AngularJS', 'TypeScript', 'JavaScript', 'Next.js', 'Tailwind CSS', 'Sass'].map((t) => (
+              <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1">{t}</span>
+            ))}
+          </div>
+        </section>
+
+        <!-- Backend -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-accent">Backend</h2>
+          <div class="flex flex-wrap gap-3">
+            {['Node.js', 'Express', 'Python', 'Django', 'FastAPI', 'PHP', 'Laravel', 'Java', 'C#', '.NET', 'OpenEdge ABL', 'Spring MVC', 'Hibernate', 'Struts 1/2'].map((t) => (
+              <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1">{t}</span>
+            ))}
+          </div>
+        </section>
+
+        <!-- Bases de Datos & Plataformas -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-accent">Bases de Datos & Plataformas</h2>
+          <div class="flex flex-wrap gap-3">
+            {['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Oracle', 'DB2', 'IBM i (AS/400)'].map((t) => (
+              <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1">{t}</span>
+            ))}
+          </div>
+        </section>
+
+        <!-- Cloud, DevOps & APIs -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-accent">Cloud, DevOps & APIs</h2>
+          <div class="flex flex-wrap gap-3">
+            {['AWS', 'Azure', 'Docker', 'Jenkins', 'Git', 'REST APIs', 'WebServices (SOAP)'].map((t) => (
+              <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1">{t}</span>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>
+
