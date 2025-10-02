@@ -65,9 +65,17 @@ const title = 'Currículum Vitae | Kennykrass';
           <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-accent">Habilidades y Tecnologías</h2>
           <div class="space-y-4">
             <div>
+              <h3 class="font-semibold mb-2">Frontend</h3>
+              <div class="flex flex-wrap gap-2">
+                {['React', 'Vue.js', 'Angular', 'AngularJS', 'TypeScript', 'JavaScript', 'Next.js', 'Tailwind CSS', 'Sass'].map((s) => (
+                  <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{s}</span>
+                ))}
+              </div>
+            </div>
+            <div>
               <h3 class="font-semibold mb-2">Backend · Lenguajes</h3>
               <div class="flex flex-wrap gap-2">
-                {['Java', 'C#', '.NET', 'OpenEdge ABL', 'Python'].map((s) => (
+                {['Java', 'C#', '.NET', 'OpenEdge ABL', 'Python', 'Node.js', 'PHP'].map((s) => (
                   <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{s}</span>
                 ))}
               </div>
@@ -75,7 +83,7 @@ const title = 'Currículum Vitae | Kennykrass';
             <div>
               <h3 class="font-semibold mb-2">Frameworks</h3>
               <div class="flex flex-wrap gap-2">
-                {['Spring MVC', 'Hibernate', 'Struts 1/2', 'AngularJS', 'TypeScript', 'JavaScript'].map((s) => (
+                {['Spring MVC', 'Hibernate', 'Struts 1/2', 'Express', 'Django', 'FastAPI', 'Laravel'].map((s) => (
                   <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{s}</span>
                 ))}
               </div>
@@ -83,7 +91,7 @@ const title = 'Currículum Vitae | Kennykrass';
             <div>
               <h3 class="font-semibold mb-2">Bases de Datos · Plataformas</h3>
               <div class="flex flex-wrap gap-2">
-                {['Oracle', 'DB2', 'IBM i (AS/400)'].map((s) => (
+                {['Oracle', 'DB2', 'IBM i (AS/400)', 'MongoDB', 'PostgreSQL', 'MySQL', 'Redis'].map((s) => (
                   <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{s}</span>
                 ))}
               </div>
@@ -91,7 +99,7 @@ const title = 'Currículum Vitae | Kennykrass';
             <div>
               <h3 class="font-semibold mb-2">Cloud · DevOps · APIs</h3>
               <div class="flex flex-wrap gap-2">
-                {['Azure', 'Jenkins', 'REST APIs', 'WebServices (SOAP)', 'Git / Versionamiento de Código'].map((s) => (
+                {['AWS', 'Azure', 'Docker', 'Jenkins', 'Git', 'REST APIs', 'WebServices (SOAP)'].map((s) => (
                   <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{s}</span>
                 ))}
               </div>
