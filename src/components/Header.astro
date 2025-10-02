@@ -12,7 +12,7 @@ const navItems = [
 ---
 
 <header class="fixed top-0 w-full bg-white/95 dark:bg-background/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 z-50">
-  <nav class="container mx-auto px-4 py-4">
+  <nav class="container mx-auto px-4 py-4 relative">
     <div class="flex justify-between items-center">
       <a href="/" class="flex items-center gap-3 group">
         <Logo class="h-10 w-10 group-hover:scale-110 transition-transform duration-300" />
@@ -35,21 +35,34 @@ const navItems = [
 
       <!-- Mobile Menu Button -->
       <div class="flex items-center">
-        <button id="mobile-menu-btn" class="md:hidden text-text-primary">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
+        <button 
+          id="mobile-menu-btn" 
+          class="md:hidden text-text-primary p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-accent"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Abrir menú"
+        >
+          <svg id="icon-menu" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+          <span class="sr-only">Abrir menú</span>
         </button>
       </div>
     </div>
 
     <!-- Mobile Menu -->
-    <ul id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
+    <ul 
+      id="mobile-menu" 
+      class="hidden md:hidden absolute left-0 right-0 mt-4 space-y-2 p-4 bg-white dark:bg-background border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg z-50"
+    >
       {navItems.map((item) => (
         <li>
           <a 
             href={item.href} 
-            class="block text-gray-600 dark:text-text-secondary hover:text-blue-600 dark:hover:text-accent transition-colors duration-300 py-2"
+            class="block text-gray-600 dark:text-text-secondary hover:text-blue-600 dark:hover:text-accent transition-colors duration-300 py-2 px-2 rounded-md hover:bg-gray-50 dark:hover:bg-primary"
           >
             {item.label}
           </a>
@@ -57,21 +70,50 @@ const navItems = [
       ))}
     </ul>
   </nav>
+  <div id="mobile-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm md:hidden hidden z-40"></div>
 </header>
 
 <script>
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileOverlay = document.getElementById('mobile-overlay');
+  const iconMenu = document.getElementById('icon-menu');
+  const iconClose = document.getElementById('icon-close');
+
+  const openMenu = () => {
+    mobileMenu?.classList.remove('hidden');
+    mobileOverlay?.classList.remove('hidden');
+    mobileMenuBtn?.setAttribute('aria-expanded', 'true');
+    mobileMenuBtn?.setAttribute('aria-label', 'Cerrar menú');
+    iconMenu?.classList.add('hidden');
+    iconClose?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeMenu = () => {
+    mobileMenu?.classList.add('hidden');
+    mobileOverlay?.classList.add('hidden');
+    mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+    mobileMenuBtn?.setAttribute('aria-label', 'Abrir menú');
+    iconMenu?.classList.remove('hidden');
+    iconClose?.classList.add('hidden');
+    document.body.style.overflow = '';
+  };
 
   mobileMenuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
+    if (mobileMenu?.classList.contains('hidden')) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
   });
 
-  // Close mobile menu when clicking a link
+  mobileOverlay?.addEventListener('click', () => closeMenu());
+
   const mobileLinks = mobileMenu?.querySelectorAll('a');
-  mobileLinks?.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-    });
+  mobileLinks?.forEach((link) => link.addEventListener('click', () => closeMenu()));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
   });
 </script>
