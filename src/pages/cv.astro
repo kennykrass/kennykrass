@@ -7,68 +7,209 @@ const title = 'Currículum Vitae | Kennykrass';
 
 <Layout title={title}>
   <div class="container mx-auto px-4 py-16">
-    <header class="mb-10 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-3">
-        <span class="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-accent dark:to-blue-400 bg-clip-text text-transparent">Currículum Vitae</span>
-      </h1>
-      <p class="text-text-secondary">Resumen profesional, experiencia, habilidades y educación</p>
-      <div class="mt-6">
-        <a href="/cv.pdf" class="inline-block border-2 border-blue-600 dark:border-accent text-blue-600 dark:text-accent font-semibold py-2 px-5 rounded-lg hover:bg-blue-600 dark:hover:bg-accent hover:text-white dark:hover:text-background transition-colors" target="_blank" rel="noopener">
-          Descargar PDF
-        </a>
+    <!-- Encabezado -->
+    <header class="mb-10">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold">
+            <span class="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-accent dark:to-blue-400 bg-clip-text text-transparent">Kenny Z. López L.</span>
+          </h1>
+          <p class="text-text-secondary mt-2">Ingeniero en Sistemas · Sr. Desarrollador de Software – Analista</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="/cv.pdf" target="_blank" rel="noopener" class="border-2 border-blue-600 dark:border-accent text-blue-600 dark:text-accent font-semibold py-2 px-5 rounded-lg hover:bg-blue-600 dark:hover:bg-accent hover:text-white dark:hover:text-background transition-colors">
+            Descargar PDF
+          </a>
+          <a href="/#contacto" class="border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-text-secondary font-semibold py-2 px-5 rounded-lg hover:border-blue-600 hover:text-blue-600 dark:hover:border-accent dark:hover:text-accent transition-colors">
+            Contacto
+          </a>
+        </div>
       </div>
     </header>
 
-    <section class="max-w-4xl mx-auto space-y-8">
-      <!-- Resumen -->
-      <div class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-3 text-blue-600 dark:text-accent">Resumen</h2>
-        <p class="text-text-secondary">
-          Desarrollador Web Full Stack con experiencia creando aplicaciones modernas, performantes y escalables. 
-          Enfocado en experiencias de usuario de alta calidad, buenas prácticas y entrega continua.
-        </p>
-      </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Columna lateral -->
+      <aside class="lg:col-span-4 space-y-6">
+        <!-- Perfil -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-accent">Perfil Profesional</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Ingeniero en sistemas con 10 años de experiencia en desarrollo de software, destacando en entornos financieros, bancarios y corporativos. Fuerte capacidad para trabajar en equipo, bajo presión y con enfoque en la resolución de problemas complejos. Alta adaptabilidad al aprendizaje de nuevas tecnologías. Profesional comprometido, proactivo y orientado a resultados.
+          </p>
+        </section>
 
-      <!-- Experiencia -->
-      <div class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-accent">Experiencia</h2>
-        <div class="space-y-6">
+        <!-- Contacto -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-accent">Contacto</h2>
+          <ul class="text-text-secondary space-y-2">
+            <li><span class="font-medium text-gray-700 dark:text-text-primary">Ubicación:</span> Monterrey, N.L.</li>
+            <li><span class="font-medium text-gray-700 dark:text-text-primary">Tel:</span> <a href="tel:+528261271115" class="hover:underline">826 127 1115</a></li>
+            <li><span class="font-medium text-gray-700 dark:text-text-primary">Email:</span> <a href="mailto:kennysk81@gmail.com" class="hover:underline">kennysk81@gmail.com</a></li>
+            <li><span class="font-medium text-gray-700 dark:text-text-primary">Edad:</span> 27 años</li>
+            <li><span class="font-medium text-gray-700 dark:text-text-primary">Estado civil:</span> Soltero</li>
+            <li><span class="font-medium text-gray-700 dark:text-text-primary">Sexo:</span> Masculino</li>
+          </ul>
+        </section>
+
+        <!-- Idiomas -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-accent">Idiomas</h2>
+          <ul class="text-text-secondary space-y-1">
+            <li>Español — Nativo</li>
+            <li>Inglés — Avanzado</li>
+          </ul>
+        </section>
+
+        <!-- Habilidades -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-xl font-bold mb-3 text-blue-600 dark:text-accent">Habilidades y Tecnologías</h2>
+          <div class="space-y-4">
+            <div>
+              <h3 class="font-semibold mb-2">Backend · Lenguajes</h3>
+              <div class="flex flex-wrap gap-2">
+                {['Java', 'C#', '.NET', 'OpenEdge ABL', 'Python'].map((s) => (
+                  <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{s}</span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold mb-2">Frameworks</h3>
+              <div class="flex flex-wrap gap-2">
+                {['Spring MVC', 'Hibernate', 'Struts 1/2', 'AngularJS', 'TypeScript', 'JavaScript'].map((s) => (
+                  <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{s}</span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold mb-2">Bases de Datos · Plataformas</h3>
+              <div class="flex flex-wrap gap-2">
+                {['Oracle', 'DB2', 'IBM i (AS/400)'].map((s) => (
+                  <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{s}</span>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 class="font-semibold mb-2">Cloud · DevOps · APIs</h3>
+              <div class="flex flex-wrap gap-2">
+                {['Azure', 'Jenkins', 'REST APIs', 'WebServices (SOAP)', 'Git / Versionamiento de Código'].map((s) => (
+                  <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{s}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <!-- Columna principal -->
+      <main class="lg:col-span-8 space-y-6">
+        <!-- Experiencia Profesional -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-accent">Experiencia Profesional</h2>
+
+          <!-- Vector Casa de Bolsa -->
+          <article class="mb-6">
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 class="text-xl font-semibold">Vector Casa de Bolsa · San Pedro, N.L.</h3>
+              <span class="text-sm text-text-secondary">05/2021 – 07/2025</span>
+            </div>
+            <p class="text-sm text-text-secondary">Área: Transformación Digital · Rol: Sr. Desarrollador de Software – Analista</p>
+            <ul class="list-disc pl-5 mt-3 text-text-secondary space-y-1">
+              <li>Lideré iniciativas de transformación digital en cambio extranjero, diseñando soluciones robustas con OpenEdge ABL para optimizar operaciones de trading.</li>
+              <li>Implementé mejoras en la arquitectura y flujos de integración (REST APIs, Azure).</li>
+              <li>Coordiné con equipos multifuncionales para continuidad operativa y resolución rápida de incidentes.</li>
+              <li>Mentor de desarrolladores junior: estándares de codificación, code reviews y metodologías ágiles.</li>
+              <li>Aseguré cumplimiento normativo y altos estándares de seguridad en soluciones financieras.</li>
+            </ul>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {['OpenEdge ABL', '.NET', 'REST APIs', 'Azure'].map((t) => (
+                <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-2 py-0.5 text-xs">{t}</span>
+              ))}
+            </div>
+          </article>
+
+          <!-- Banco Afirme -->
+          <article class="mb-6">
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 class="text-xl font-semibold">Banco Afirme · San Nicolás, N.L.</h3>
+              <span class="text-sm text-text-secondary">01/2020 – 05/2021</span>
+            </div>
+            <p class="text-sm text-text-secondary">Área: Soporte Operativo · Rol: Sr. Desarrollador de Software – Analista</p>
+            <ul class="list-disc pl-5 mt-3 text-text-secondary space-y-1">
+              <li>Construí y mantuve aplicaciones bancarias escalables con Java, Spring MVC y Oracle.</li>
+              <li>Automatizé procesos críticos, reduciendo tiempos de respuesta a fallas técnicas.</li>
+              <li>Colaboré con TI para despliegues exitosos y cumplimiento de SLA internos.</li>
+            </ul>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {['Java', 'Maven', 'Spring MVC', 'WebServices', 'Oracle', 'WebLogic'].map((t) => (
+                <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-2 py-0.5 text-xs">{t}</span>
+              ))}
+            </div>
+          </article>
+
+          <!-- Metalsa -->
+          <article class="mb-6">
+            <div class="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 class="text-xl font-semibold">Metalsa · Apodaca, N.L.</h3>
+              <span class="text-sm text-text-secondary">06/2019 – 12/2019</span>
+            </div>
+            <p class="text-sm text-text-secondary">Área: Departamento de Tecnologías Informáticas · Rol: Jr. Desarrollador de Software</p>
+            <ul class="list-disc pl-5 mt-3 text-text-secondary space-y-1">
+              <li>Mantuve y depuré el sistema principal en Java, asegurando estabilidad operativa.</li>
+              <li>Automatizé pruebas con Jenkins dentro de Integración Continua.</li>
+              <li>Ejecuté consultas complejas y gestioné carga de datos en Oracle para soporte interno.</li>
+            </ul>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {['Java', 'Oracle', 'Spring MVC', 'C#', 'Jenkins'].map((t) => (
+                <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-2 py-0.5 text-xs">{t}</span>
+              ))}
+            </div>
+          </article>
+
+          <!-- Universidad de Montemorelos -->
           <article>
             <div class="flex flex-wrap items-baseline justify-between gap-2">
-              <h3 class="text-xl font-semibold">Desarrollador Full Stack</h3>
-              <span class="text-sm text-text-secondary">2021 — Presente</span>
+              <h3 class="text-xl font-semibold">Universidad de Montemorelos · Montemorelos, N.L.</h3>
+              <span class="text-sm text-text-secondary">06/2016 – 05/2020</span>
             </div>
-            <p class="text-text-secondary mt-2">Proyectos para startups y pymes. Stack: React/Next.js, Node.js, Astro, Tailwind, Netlify/AWS.</p>
-            <ul class="list-disc pl-5 mt-2 text-text-secondary space-y-1">
-              <li>Diseño e implementación de APIs y UIs responsivas.</li>
-              <li>Mejoras de rendimiento (Core Web Vitals) y accesibilidad.</li>
-              <li>Automatización de despliegues (CI/CD) y monitoreo.</li>
+            <p class="text-sm text-text-secondary">Área: Departamento de Sistemas · Rol: Jr. Desarrollador de Software</p>
+            <ul class="list-disc pl-5 mt-3 text-text-secondary space-y-1">
+              <li>Mantenimiento y evolución del sistema financiero (Java + Spring MVC) con mejoras funcionales.</li>
+              <li>Desarrollo del sistema de control de acceso del comedor universitario con AngularJS y lectores RFID.</li>
+              <li>Pruebas funcionales y soporte técnico a usuarios clave.</li>
             </ul>
+            <div class="mt-2 flex flex-wrap gap-2">
+              {['Java', 'AngularJS', 'Spring MVC', 'TypeScript', 'C#', 'JavaScript', 'Python', 'SQL', 'Hibernate'].map((t) => (
+                <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-2 py-0.5 text-xs">{t}</span>
+              ))}
+            </div>
           </article>
+        </section>
+
+        <!-- Educación -->
+        <section class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-accent">Educación</h2>
+          <div class="space-y-4">
+            <div>
+              <div class="flex items-baseline justify-between">
+                <h3 class="text-lg font-semibold">Ingeniería en Sistemas Computacionales</h3>
+                <span class="text-sm text-text-secondary">2016 – 2020</span>
+              </div>
+              <p class="text-text-secondary">Universidad de Montemorelos</p>
+            </div>
+            <div>
+              <div class="flex items-baseline justify-between">
+                <h3 class="text-lg font-semibold">Técnico en Informática</h3>
+                <span class="text-sm text-text-secondary">2013 – 2016</span>
+              </div>
+              <p class="text-text-secondary">Centro de Bachillerato Tecnológico Agropecuario #20</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="text-center">
+          <a href="/#contacto" class="text-blue-600 dark:text-accent hover:underline font-medium">Ir a Contacto →</a>
         </div>
-      </div>
-
-      <!-- Habilidades -->
-      <div class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-4 text-blue-600 dark:text-accent">Habilidades</h2>
-        <div class="flex flex-wrap gap-2">
-          {['JavaScript', 'TypeScript', 'React', 'Node.js', 'Astro', 'Next.js', 'Tailwind CSS', 'REST', 'GraphQL', 'MongoDB', 'PostgreSQL'].map((skill) => (
-            <span class="bg-white/60 dark:bg-background/60 border border-gray-200 dark:border-gray-700 rounded-md px-3 py-1 text-sm">{skill}</span>
-          ))}
-        </div>
-      </div>
-
-      <!-- Educación -->
-      <div class="bg-gray-50 dark:bg-primary border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-        <h2 class="text-2xl font-bold mb-3 text-blue-600 dark:text-accent">Educación</h2>
-        <p class="text-text-secondary">Detalle tu formación aquí.</p>
-      </div>
-
-      <!-- Contacto -->
-      <div class="text-center">
-        <a href="/#contacto" class="text-blue-600 dark:text-accent hover:underline font-medium">Ir a Contacto →</a>
-      </div>
-    </section>
+      </main>
+    </div>
   </div>
 </Layout>
-
