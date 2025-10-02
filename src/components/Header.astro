@@ -117,4 +117,23 @@ const navItems = [
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeMenu();
   });
+
+  // Cerrar al hacer click fuera del menú o del botón
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    const isOpen = !mobileMenu?.classList.contains('hidden');
+    if (!isOpen) return;
+    const clickInsideMenu = mobileMenu?.contains(target as Node);
+    const clickOnButton = mobileMenuBtn?.contains(target as Node);
+    if (!clickInsideMenu && !clickOnButton) {
+      closeMenu();
+    }
+  });
+
+  // Evitar que clicks dentro del menú o botón propaguen y cierren
+  mobileMenu?.addEventListener('click', (e) => e.stopPropagation());
+  mobileMenuBtn?.addEventListener('click', (e) => e.stopPropagation());
+
+  // Cerrar al redimensionar (evita estados raros entre breakpoints)
+  window.addEventListener('resize', () => closeMenu());
 </script>
